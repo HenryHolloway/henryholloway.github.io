@@ -454,6 +454,15 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
+
+        /* Stacked Grid for varying content lengths */
+        .stacked-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
         
         .resource-card {
             background: white;
@@ -928,7 +937,7 @@
                 <p>There are an abundance of online resources available to support your teaching and instruction in a secondary math classroom. Here is a list of recommended resources to aid in your instruction. For a more in depth description of some Education Technology Tools, <a href="#technology" style="color: var(--primary); font-weight: 600; text-decoration: underline;">see here</a>.</p>
             </div>
             
-            <div class="resource-grid">
+            <div class="stacked-grid">
                 <!-- Teachers Pay Teachers -->
                 <div class="resource-card">
                     <div class="resource-header">
@@ -1269,7 +1278,7 @@
                 <p>Clear, concise descriptions of technology tools for enhancing mathematics learning experiences, including concrete examples of effective classroom integration.</p>
             </div>
             
-            <div class="resource-grid">
+            <div class="stacked-grid">
                 <!-- Blooket -->
                 <div class="resource-card">
                     <div class="resource-header">
@@ -1290,7 +1299,8 @@
                     </div>
                     <div class="resource-footer" style="flex-wrap: wrap; gap: 12px;">
                         <a href="https://www.blooket.com/" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit Website</a>
-                        <button class="btn btn-secondary video-modal-btn" data-video-id="XSIuXOJQOc4"><i class="fab fa-youtube"></i> Watch Tutorial</button>
+                        <!-- Replace YOUR_VIDEO_ID with your actual YouTube video ID -->
+                        <button class="btn btn-secondary video-modal-btn" data-video-id="YOUR_VIDEO_ID"><i class="fab fa-youtube"></i> Watch Tutorial</button>
                     </div>
                 </div>
                 
@@ -1309,7 +1319,6 @@
                     </div>
                     <div class="resource-footer" style="flex-wrap: wrap; gap: 12px;">
                         <a href="https://www.geogebra.org/" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit Website</a>
-                        <!-- Megan's video ID is ccmyu8KRAYg -->
                         <button class="btn btn-secondary video-modal-btn" data-video-id="ccmyu8KRAYg"><i class="fab fa-youtube"></i> Watch Tutorial</button>
                     </div>
                 </div>
