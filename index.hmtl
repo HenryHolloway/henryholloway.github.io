@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary Math Teaching Toolkit | EDU563</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-light);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: linear-gradient(to bottom, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+        }
+        
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: var(--gradient);
+            border-radius: 16px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hero-card h3 {
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+        
+        .hero-card p {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+        
+        .hero-card .math-illustration {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Overview Section */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .overview-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .overview-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .overview-card h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .overview-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .overview-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .overview-card ul li {
+            padding: 8px 0;
+            color: var(--gray);
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .overview-card ul li::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* UDL Section */
+        .udl-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .udl-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .udl-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .udl-card.engagement { border-top-color: var(--success); }
+        .udl-card.representation { border-top-color: var(--warning); }
+        .udl-card.action { border-top-color: var(--danger); }
+        
+        .udl-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .udl-card p {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+        
+        .udl-strategies {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .udl-strategies h4 {
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .udl-strategies ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .udl-strategies ul li {
+            padding: 8px 0;
+            color: var(--gray);
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .udl-strategies ul li::before {
+            content: '→';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Generic Resource/Placeholder Cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .resource-header {
+            background: var(--light);
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .resource-header h4 {
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .resource-header .category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .resource-body {
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .resource-body p {
+            color: var(--gray);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        
+        .resource-body ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+        
+        .resource-body ul li {
+            padding: 4px 0;
+            color: var(--gray);
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .resource-body ul li::before {
+            content: '✓';
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+        
+        .resource-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .resource-footer .btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 64px 0 32px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 0.85rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Download Button */
+        .download-section {
+            background: var(--gradient);
+            padding: 64px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .download-section h2 {
+            color: white;
+            margin-bottom: 16px;
+        }
+        
+        .download-section p {
+            margin-bottom: 32px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-btn {
+            background: white;
+            color: var(--primary);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 24px;
+                box-shadow: var(--shadow);
+                gap: 16px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">∑</div>
+                <span>Math Toolkit</span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#materials">Materials</a></li>
+                <li><a href="#strategies">Strategies</a></li>
+                <li><a href="#assessment">Assessment</a></li>
+                <li><a href="#udl">UDL</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content animate-fade-in-up">
+                    <h1>Secondary Math Teaching Toolkit</h1>
+                    <p class="subtitle">A comprehensive resource for educators to create inclusive, engaging, and effective mathematics learning experiences for all students.</p>
+                    <div class="hero-buttons">
+                        <a href="#overview" class="btn btn-primary">
+                            <i class="fas fa-arrow-down"></i> Explore Toolkit
+                        </a>
+                        <a href="#download" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Download Resources
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image animate-fade-in-up">
+                    <div class="hero-card">
+                        <h3>Toolkit Highlights</h3>
+                        <p>Designed for secondary mathematics educators (Grades 6-12)</p>
+                        <div class="math-illustration">
+                            f(x) = ax² + bx + c
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">6+</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Grade Levels</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">20+</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Resources</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">UDL</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Aligned</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">AI</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Integrated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Overview Section -->
+    <section id="overview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Overview</h2>
+                <p>Welcome to the Secondary Mathematics Teaching Toolkit. This resource is designed to support educators in creating inclusive, engaging, and effective mathematics learning experiences for students in grades 6-12.</p>
+            </div>
+            
+            <div class="overview-grid">
+                <!-- Introduction Card -->
+                <div class="overview-card">
+                    <h3><i class="fas fa-book-open"></i> Introduction</h3>
+                    <p>This toolkit serves as a comprehensive resource for secondary mathematics educators, providing practical strategies, materials, and technological tools to enhance teaching and learning. Developed as part of EDU563, this project synthesizes current research in mathematics education, Universal Design for Learning (UDL), and culturally responsive teaching.</p>
+                    <p>The toolkit is designed to be a living document, adaptable to various classroom contexts and student needs. It emphasizes evidence-based practices that promote conceptual understanding, procedural fluency, and mathematical reasoning for all learners.</p>
+                </div>
+                
+                <!-- Target Audience Card -->
+                <div class="overview-card">
+                    <h3><i class="fas fa-users"></i> Target Audience</h3>
+                    <p>This toolkit is specifically designed for:</p>
+                    <ul>
+                        <li><strong>Grade Levels:</strong> Secondary mathematics (Grades 6-12)</li>
+                        <li><strong>Subject Areas:</strong> Algebra, Geometry, Algebra II, Pre-Calculus, Calculus, Statistics</li>
+                        <li><strong>Educators:</strong> Pre-service and in-service mathematics teachers</li>
+                        <li><strong>Special Populations:</strong> Students with diverse learning needs, multilingual learners, gifted students</li>
+                    </ul>
+                    <p>While designed for secondary educators, many strategies and resources can be adapted for middle school or post-secondary contexts.</p>
+                </div>
+                
+                <!-- Purpose & Context Card -->
+                <div class="overview-card">
+                    <h3><i class="fas fa-bullseye"></i> Purpose & Context</h3>
+                    <p>The purpose of this toolkit is to provide mathematics educators with:</p>
+                    <ul>
+                        <li>Practical, research-based instructional strategies</li>
+                        <li>Diverse assessment methods that reveal student understanding</li>
+                        <li>Technology tools that enhance mathematical learning</li>
+                        <li>UDL and differentiation strategies for diverse learners</li>
+                        <li>Resources for culturally responsive mathematics teaching</li>
+                    </ul>
+                    <p>This toolkit addresses the need for comprehensive, accessible resources that support educators in implementing equitable mathematics instruction. It is grounded in the belief that all students can succeed in mathematics when provided with appropriate support, challenges, and learning opportunities.</p>
+                </div>
+                
+                <!-- Group Members Card -->
+                <div class="overview-card">
+                    <h3><i class="fas fa-user-friends"></i> Group Members</h3>
+                    <p>Developed by a team of dedicated educators committed to excellence in mathematics teaching:</p>
+                    <div style="display: grid; gap: 16px;">
+                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--light); border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">JD</div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">Jane Doe</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Mathematics Education Specialist</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--light); border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">JS</div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">John Smith</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Curriculum & Instruction</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--light); border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">AB</div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--dark);">Alex Brown</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Educational Technology</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Instructional Materials Section -->
+    <section id="materials" style="background: var(--light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Instructional Materials</h2>
+                <p>A comprehensive list and description of recommended instructional materials for secondary mathematics classrooms.</p>
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Material Title One</h4>
+                        <span class="category">Category</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet</li>
+                            <li>Consectetur adipiscing elit</li>
+                            <li>Sed do eiusmod tempor</li>
+                        </ul>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Material Title Two</h4>
+                        <span class="category">Category</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <ul>
+                            <li>Duis aute irure dolor</li>
+                            <li>Reprehenderit in voluptate</li>
+                            <li>Velit esse cillum</li>
+                        </ul>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Learn More</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Material Title Three</h4>
+                        <span class="category">Category</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        <ul>
+                            <li>Nemo enim ipsam</li>
+                            <li>Voluptatem quia</li>
+                            <li>Voluptas sit aspernatur</li>
+                        </ul>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Teaching Strategies Section -->
+    <section id="strategies">
+        <div class="container">
+            <div class="section-header">
+                <h2>Teaching Strategies</h2>
+                <p>Identification and elaboration of teaching strategies specifically tailored to secondary mathematics.</p>
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Strategy Title One</h4>
+                        <span class="category">Active Learning</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Strategy Title Two</h4>
+                        <span class="category">Critical Thinking</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.</p>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Strategy Title Three</h4>
+                        <span class="category">Student Agency</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Assessment Strategies Section -->
+    <section id="assessment" style="background: var(--light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Assessment Strategies</h2>
+                <p>Presentation of diverse formative assessment methods appropriate for secondary mathematics.</p>
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Formative Assessment One</h4>
+                        <span class="category">Method</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-download"></i> Template</a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Formative Assessment Two</h4>
+                        <span class="category">Method</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-download"></i> Template</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Formative Assessment Three</h4>
+                        <span class="category">Method</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-download"></i> Template</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. UDL & Differentiation Section -->
+    <section id="udl">
+        <div class="container">
+            <div class="section-header">
+                <h2>UDL & Differentiation Strategies</h2>
+                <p>Specific strategies grounded in Universal Design for Learning and differentiation for diverse mathematics learners.</p>
+            </div>
+            
+            <div class="udl-principles">
+                <!-- Engagement Card -->
+                <div class="udl-card engagement">
+                    <h3><i class="fas fa-heart"></i> Multiple Means of Engagement</h3>
+                    <p>Strategies to optimize learner motivation, interest, and sustained effort in mathematics learning.</p>
+                    
+                    <div class="udl-strategies">
+                        <h4>Recruiting Interest</h4>
+                        <ul>
+                            <li>Provide mathematical problems that connect to students' lives and cultures</li>
+                            <li>Offer choices in topics, contexts, or methods for exploration</li>
+                            <li>Use authentic, real-world mathematical tasks and projects</li>
+                            <li>Incorporate mathematical games and puzzles</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Sustaining Effort & Persistence</h4>
+                        <ul>
+                            <li>Provide clear mathematical goals and objectives</li>
+                            <li>Use collaborative mathematical problem-solving</li>
+                            <li>Offer varied levels of challenge and support</li>
+                            <li>Provide opportunities for mathematical communication and reasoning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Self-Regulation</h4>
+                        <ul>
+                            <li>Teach mathematical metacognitive strategies</li>
+                            <li>Provide opportunities for self-assessment and reflection</li>
+                            <li>Develop mathematical identity and agency</li>
+                            <li>Encourage mathematical risk-taking and productive struggle</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Representation Card -->
+                <div class="udl-card representation">
+                    <h3><i class="fas fa-eye"></i> Multiple Means of Representation</h3>
+                    <p>Strategies to present mathematical concepts and information in diverse ways.</p>
+                    
+                    <div class="udl-strategies">
+                        <h4>Perception</h4>
+                        <ul>
+                            <li>Provide mathematical information in multiple formats (text, symbols, diagrams, manipulatives)</li>
+                            <li>Offer auditory and visual alternatives for mathematical content</li>
+                            <li>Use mathematical software that allows customization of display</li>
+                            <li>Provide mathematical vocabulary support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Language & Symbols</h4>
+                        <ul>
+                            <li>Clarify mathematical notation and symbols</li>
+                            <li>Provide mathematical glossaries and reference materials</li>
+                            <li>Use mathematical representations (graphs, tables, diagrams)</li>
+                            <li>Connect mathematical symbols to concepts</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Comprehension</h4>
+                        <ul>
+                            <li>Use mathematical modeling and multiple representations</li>
+                            <li>Provide mathematical examples and non-examples</li>
+                            <li>Use visualizations and interactive tools</li>
+                            <li>Connect mathematical concepts across topics</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Action & Expression Card -->
+                <div class="udl-card action">
+                    <h3><i class="fas fa-hand-paper"></i> Multiple Means of Action & Expression</h3>
+                    <p>Strategies to differentiate how learners demonstrate mathematical understanding.</p>
+                    
+                    <div class="udl-strategies">
+                        <h4>Physical Action</h4>
+                        <ul>
+                            <li>Provide mathematical tools and manipulatives</li>
+                            <li>Offer mathematical software and technology</li>
+                            <li>Use mathematical drawing and construction tools</li>
+                            <li>Provide mathematical templates and organizers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Expression & Communication</h4>
+                        <ul>
+                            <li>Allow multiple ways to demonstrate mathematical understanding</li>
+                            <li>Use mathematical writing and speaking opportunities</li>
+                            <li>Provide mathematical modeling and problem-solving</li>
+                            <li>Use mathematical presentations and explanations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="udl-strategies">
+                        <h4>Executive Function</h4>
+                        <ul>
+                            <li>Provide mathematical goal-setting and planning support</li>
+                            <li>Use mathematical information management tools</li>
+                            <li>Provide mathematical progress monitoring</li>
+                            <li>Teach mathematical self-monitoring strategies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Differentiation Strategies -->
+            <div style="background: white; border-radius: 16px; padding: 32px; box-shadow: var(--shadow);">
+                <h3 style="margin-bottom: 24px; color: var(--primary);"><i class="fas fa-users-cog"></i> Differentiation Strategies for Diverse Learners</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                    <!-- Students with Disabilities -->
+                    <div style="padding: 24px; background: var(--light); border-radius: 12px;">
+                        <h4 style="color: var(--dark); margin-bottom: 16px;"><i class="fas fa-universal-access"></i> Students with Disabilities</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Conceptual Understanding:</strong> Use concrete manipulatives and visual representations</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Procedural Fluency:</strong> Provide step-by-step worked examples and practice</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Problem Solving:</strong> Offer graphic organizers and problem-solving frameworks</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Assessment:</strong> Allow alternative response formats and extended time</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Technology:</strong> Use mathematical software with accessibility features</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Multilingual Learners -->
+                    <div style="padding: 24px; background: var(--light); border-radius: 12px;">
+                        <h4 style="color: var(--dark); margin-bottom: 16px;"><i class="fas fa-language"></i> Multilingual Learners</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Language Support:</strong> Provide mathematical vocabulary lists with translations</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Visual Aids:</strong> Use diagrams, charts, and manipulatives</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Sentence Frames:</strong> Provide mathematical communication starters</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Cultural Connections:</strong> Include mathematical contributions from diverse cultures</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Grouping:</strong> Use heterogeneous and homogeneous language groups</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Gifted Students -->
+                    <div style="padding: 24px; background: var(--light); border-radius: 12px;">
+                        <h4 style="color: var(--dark); margin-bottom: 16px;"><i class="fas fa-star"></i> Gifted & Talented Students</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Depth:</strong> Explore mathematical concepts in greater depth</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Complexity:</strong> Use more complex mathematical problems and contexts</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Pace:</strong> Allow acceleration through mathematical content</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Creativity:</strong> Encourage mathematical creativity and exploration</li>
+                            <li style="padding: 8px 0; color: var(--gray);"><strong>Independence:</strong> Provide opportunities for independent mathematical research</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Technology Tools Section -->
+    <section id="technology" style="background: var(--light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Educational Technology Tools</h2>
+                <p>Clear, concise descriptions of technology tools for enhancing mathematics learning experiences.</p>
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Tech Tool One</h4>
+                        <span class="category">Interactive</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p><strong>Benefits:</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+                        <p><strong>Challenges:</strong> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit</a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Tech Tool Two</h4>
+                        <span class="category">Graphing</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        <p><strong>Benefits:</strong> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                        <p><strong>Challenges:</strong> Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Tech Tool Three</h4>
+                        <span class="category">Free Access</span>
+                    </div>
+                    <div class="resource-body">
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil.</p>
+                        <p><strong>Benefits:</strong> Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse.</p>
+                        <p><strong>Challenges:</strong> Nisi ut aliquid ex ea commodi consequatur ullam corporis suscipit.</p>
+                    </div>
+                    <div class="resource-footer">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <h2>Download the Toolkit</h2>
+            <p>Access all our templates, checklists, and editable documents in one convenient place. Designed for easy integration into your teaching practice.</p>
+            <a href="#" class="download-btn">
+                <i class="fas fa-cloud-download-alt"></i> Download All Resources
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Math Toolkit</h4>
+                    <p style="color: var(--gray-light); font-size: 0.9rem;">A comprehensive resource for secondary mathematics educators.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#materials">Materials</a></li>
+                        <li><a href="#strategies">Strategies</a></li>
+                        <li><a href="#assessment">Assessment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#udl">UDL Strategies</a></li>
+                        <li><a href="#technology">Tech Tools</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">EDU563 Project</a></li>
+                        <li><a href="#">Group Members</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Secondary Math Teaching Toolkit | EDU563. Proudly hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Navigation
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
