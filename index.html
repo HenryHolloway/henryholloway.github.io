@@ -1378,6 +1378,43 @@
                 navLinks.classList.remove('active');
             });
         });
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('videoModal');
+        const modalVideoFrame = document.getElementById('modalVideoFrame');
+        const closeBtn = document.querySelector('.close-video-modal');
+        const videoButtons = document.querySelectorAll('.video-modal-btn');
+
+        videoButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.getAttribute('data-video-id');
+                // Standard YouTube embed URL with autoplay enabled
+                modalVideoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                videoModal.classList.add('active');
+            });
+        });
+
+        // Function to close modal and stop video
+        const closeModal = () => {
+            videoModal.classList.remove('active');
+            modalVideoFrame.src = ''; // Clear src to stop playback
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close if clicking outside the video
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal();
+            }
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
