@@ -708,6 +708,74 @@
         .animate-fade-in-up {
             animation: fadeInUp 0.6s ease-out;
         }
+
+                /* Video Modal */
+                .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            background: var(--dark);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-video-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-video-modal:hover {
+            color: var(--primary);
+        }
+
+        .video-modal-btn {
+            cursor: pointer;
+            font-family: inherit;
+        }
     </style>
 </head>
 <body>
@@ -770,8 +838,8 @@
                                 <div style="font-size: 0.85rem; color: var(--gray);">Aligned</div>
                             </div>
                             <div style="text-align: center;">
-                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">AI</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Integrated</div>
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: 600;">Free</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Access</div>
                             </div>
                         </div>
                     </div>
@@ -1202,7 +1270,31 @@
             </div>
             
             <div class="resource-grid">
-                <!-- GeoGebra (Megan's Tool) -->
+                <!-- Blooket -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <h4>Blooket</h4>
+                        <div>
+                            <span class="category">Gamified Learning</span>
+                            <span class="category" style="background: var(--secondary); margin-left: 8px;">Formative Assessment</span>
+                        </div>
+                    </div>
+                    <div class="resource-body">
+                        <p>Blooket is a gamified, web-based learning platform that allows teachers to create or discover question sets and host them in interactive, game-based modes. For teachers, it serves as a formative assessment and review tool, while for students, it provides an engaging, competitive, and interactive way to practice concepts.</p>
+                        
+                        <p><strong>Classroom Integration:</strong> Compared to a traditional instructional approach, such as handing out a printed Geometry review worksheet, Blooket enhances the learning experience by providing immediate feedback. If a student misidentifies a supplementary angle, the game immediately corrects them, allowing for real-time self-correction rather than waiting for a teacher to grade the paper later. The free version is highly robust. Students do not need to log in or have email accounts to play; they simply enter a game PIN or scan a QR code on their devices, which is highly beneficial for student privacy and equitable access.</p>
+                        
+                        <p><strong>UDL & Culturally Responsive Teaching:</strong> Blooket’s development is rooted in the principles of gamification and game-based learning, which educational research shows can significantly increase student motivation and information retention. Grounding Blooket in the principles of Universal Design for Learning, it provides multiple means of engagement by offering various game modes; teachers can select fast-paced competitive modes or self-paced modes like "Classic" to accommodate different learner preferences and anxiety levels. Regarding culturally responsive teaching, Blooket allows teachers to custom-build questions that incorporate students' identities, cultures, and lived experiences. For example, a Geometry teacher can use word problems that reference local community architecture or culturally significant geometric patterns.</p>
+                        
+                        <p><strong>Generative AI Integration:</strong> Generative AI tools like ChatGPT or Gemini can significantly impact the use of Blooket. A teacher can leverage AI to instantly generate Geometry word problems formatted for Blooket, or to brainstorm culturally diverse contexts for math questions. However, the ethical considerations include the risk of AI hallucinating incorrect math formulas, the environmental cost of AI, and the ethical dilemma of teachers over-relying on AI rather than crafting their own pedagogically sound questions.</p>
+                    </div>
+                    <div class="resource-footer" style="flex-wrap: wrap; gap: 12px;">
+                        <a href="https://www.blooket.com/" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit Website</a>
+                        <button class="btn btn-secondary video-modal-btn" data-video-id="XSIuXOJQOc4"><i class="fab fa-youtube"></i> Watch Tutorial</button>
+                    </div>
+                </div>
+                
+                <!-- GeoGebra -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <h4>GeoGebra</h4>
@@ -1212,29 +1304,13 @@
                         </div>
                     </div>
                     <div class="resource-body">
-                        <p>GeoGebra is a "dynamic mathematics software for all levels of education" (GeoGebra, 2025). The platform features a robust calculator suite covering geometry, algebra, spreadsheets, graphing, statistics, and calculus. It also hosts over 1 million classroom resources created by staff and the global community.</p>
-                        <p><strong>Classroom Integration:</strong> Teachers can use GeoGebra as a calculator, assign interactive activities to extend learning, or generate graphs for assignments and tests. Teachers can host "GeoGebra Classrooms" to monitor student progress live, and students can use resources for free without logins.</p>
-                        <p><strong>UDL & Culturally Responsive Teaching:</strong> GeoGebra allows students to approach mathematical content beyond formulas to memorize, helping them truly visualize and understand concepts. It is an international platform available in nearly 40 languages, providing vital support for multilingual learners and offering multiple means of representation.</p>
+                        <p>Geogebra is an online website that is a “dynamic mathematics software for all levels of education”. (GeoGebra, 2025) The website has two main aspects, their calculator and their resources. Their calculator section is applicable to geometry, algebra, spreadsheets, graphing, statistics, and calculus. Their resources offer over 1 million classroom resources created by both their staff and their general online community. They offer the ability to host a GeoGebra Classroom where student progress can be monitored as well as the ability to use their resources for free and without any logins.</p>
+                        <p>A teacher may choose to use this online resource as simply a calculator for themself or their students use, to assign activities to extend their student learning, or to generate graphs for their own assignments or tests. What led me to investigate this application is my desire to learn more about the platform and the different uses as my mentor teacher utilizes this online resource more than any other in her geometry and algebra classrooms at the high school level. GeoGebra can enhance the learning experience of the students by offering interactive activities that allow the student to approach the mathematical content beyond a set of rules to learn, or formulas to memorize, but to truly understand and visualize the concepts. This can support culturally responsive teaching by supporting Universal Design for Learning practices by offering different ways of teaching and learning for students. GeoGebra is an international website that offers nearly 40 languages you can choose from to view the platform in providing support to many different diverse learners.</p>
                     </div>
                     <div class="resource-footer" style="flex-wrap: wrap; gap: 12px;">
                         <a href="https://www.geogebra.org/" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit Website</a>
-                        <a href="https://www.youtube.com/watch?v=ccmyu8KRAYg&t=3s" target="_blank" class="btn btn-secondary"><i class="fab fa-youtube"></i> Watch Tutorial</a>
-                    </div>
-                </div>
-                
-                <!-- Placeholder for Group Member 2 -->
-                <div class="resource-card">
-                    <div class="resource-header">
-                        <h4>Tech Tool Two</h4>
-                        <span class="category">Category</span>
-                    </div>
-                    <div class="resource-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p><strong>Benefits:</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-                        <p><strong>Challenges:</strong> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                    </div>
-                    <div class="resource-footer">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Visit</a>
+                        <!-- Megan's video ID is ccmyu8KRAYg -->
+                        <button class="btn btn-secondary video-modal-btn" data-video-id="ccmyu8KRAYg"><i class="fab fa-youtube"></i> Watch Tutorial</button>
                     </div>
                 </div>
 
@@ -1245,7 +1321,7 @@
                         <span class="category">Category</span>
                     </div>
                     <div class="resource-body">
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <p><strong>Benefits:</strong> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
                         <p><strong>Challenges:</strong> Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
                     </div>
@@ -1256,7 +1332,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Download Section -->
     <section id="download" class="download-section">
         <div class="container">
